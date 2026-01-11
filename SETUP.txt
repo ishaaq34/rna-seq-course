@@ -45,7 +45,15 @@ function doPost(e) {
 3. Description: "Form Submission".
 4. Execute as: **Me** (your email).
 5. Who has access: **Anyone** (This is required for the form to work).
-6. Click **Deploy**. (You may need to "Authorize Access").
+6. Click **Deploy**.
+
+> [!IMPORTANT]
+> **If you see "Google hasn't verified this app":**
+> 1. Click **Advanced**.
+> 2. Click **Go to [Project Name] (unsafe)** at the bottom left.
+> 3. Click **Allow**.
+> *This is normal because the script is private and created by you.*
+
 7. **COPY THE WEB APP URL.**
 
 ### STEP 4: Link to Website
