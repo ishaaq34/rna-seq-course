@@ -1,29 +1,62 @@
-# RNA-seq Course: 1-Minute Production Setup
+# RNA-seq Course: 1-Minute Google Sheets Setup
 
-Follow these steps to ensure you receive the DATA and the MONEY.
-
----
-
-### 1. Where do the Registrations (Information) go?
-The information goes to **ishaaq.raja@gmail.com**.
-- **Action**: 
-  1. Go to [Formspree.io](https://formspree.io/) and sign up with your email.
-  2. Create a "New Form" and copy the unique ID.
-  3. Search for `YOUR_ENDPOINT_HERE` in `index.html` and replace it with your ID.
-- **Excel Output**: Yes! In your Formspree dashboard, there is a **"Download CSV"** button. This will give you an EXCEL sheet of everyone who registers.
-
-### 2. Where does the Money go?
-The money goes to **YOUR BANK / UPI account**.
-- **Action A (Razorpay Portal)**:
-  1. Open `index.html` at Line 297.
-  2. Replace `pl_PLACEHOLDER_ID` with your Razorpay Button ID.
-- **Action B (Deep Link UPI)**:
-  1. Check `script.js` at Line 19.
-  2. **DONE**: I have already set your UPI ID to `6006393231@upi`.
+This method is FASTER than Formspree and saves data directly into your Google Sheet.
 
 ---
 
-### Why am I seeing "Some error occurred"?
-This error appears because the site is currently using a **placeholder ID**. It is safe. Once you replace it with your real ID in `index.html` (Line 297), the real button will appear and payments will work.
+### STEP 1: Prepare the Google Sheet
+1. Open a new [Google Sheet](https://sheets.new/).
+2. Name it "RNA-seq Registrations".
+3. Click on **Extensions** -> **Apps Script**.
+
+### STEP 2: Paste the Script
+Delete everything in the script editor and paste this code:
+
+```javascript
+function doPost(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var data = e.parameter;
+  
+  // Create header row if the sheet is new
+  if (sheet.getLastRow() == 0) {
+    sheet.appendRow(["Timestamp", "Email", "Research Focus", "Proficiency", "OS", "Timing", "Group Size", "Transaction ID", "Comments"]);
+  }
+  
+  // Append the data
+  sheet.appendRow([
+    new Date(), 
+    data.email, 
+    data.background, 
+    data.experience, 
+    data.os, 
+    data.timing, 
+    data['group-size'], 
+    data.transaction_id || "PENDING", 
+    data.comments
+  ]);
+  
+  return ContentService.createTextOutput("Success").setMimeType(ContentService.MimeType.TEXT);
+}
+```
+
+### STEP 3: Deploy as Web App
+1. Click the **Deploy** button (top right) -> **New deployment**.
+2. Select type: **Web App**.
+3. Description: "Form Submission".
+4. Execute as: **Me** (your email).
+5. Who has access: **Anyone** (This is required for the form to work).
+6. Click **Deploy**. (You may need to "Authorize Access").
+7. **COPY THE WEB APP URL.**
+
+### STEP 4: Link to Website
+1. Open `script.js` in your project folder.
+2. Go to **Line 52**.
+3. Replace `'YOUR_GOOGLE_SHEET_URL_HERE'` with the URL you just copied.
+
+---
+
+### 💰 Money Setup (UPI)
+- **DONE**: Your UPI ID is already set to `6006393231@upi` in `script.js`.
+- **Payment Portal**: To activate the Razorpay button, replace `pl_PLACEHOLDER_ID` in `index.html` (Line 247).
 
 Live Site: https://ishaaq34.github.io/rna-seq-course/

@@ -49,38 +49,65 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial price set
     updatePrice();
 
+    // Google Sheets Configuration
+    const googleSheetURL = 'YOUR_GOOGLE_SHEET_URL_HERE'; // <-- REPLACE THIS LATER
+
+    async function sendToGoogleSheets(data) {
+        if (googleSheetURL === 'YOUR_GOOGLE_SHEET_URL_HERE') return;
+        
+        try {
+            await fetch(googleSheetURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(data)
+            });
+            console.log('Data sent to Google Sheets');
+        } catch (error) {
+            console.error('Error sending to Google Sheets:', error);
+        }
+    }
+
     // Form submission (Step 1 -> Step 2)
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         
         const btn = form.querySelector('button');
-        btn.innerText = 'Capturing Details...';
+        const originalText = btn.innerText;
+        btn.innerText = 'Syncing...';
         btn.disabled = true;
 
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
-        console.log('Registration details captured:', data);
+        
+        // Send to Google Sheets asynchronously
+        sendToGoogleSheets(data);
 
         setTimeout(() => {
             step1.classList.remove('active');
             step2.classList.add('active');
             window.scrollTo({ top: step2.offsetTop - 100, behavior: 'smooth' });
+            btn.innerText = originalText;
+            btn.disabled = false;
         }, 800);
     });
 
     // Payment Confirmation (Step 2 -> Step 3)
-    confirmPaymentBtn.addEventListener('click', () => {
+    confirmPaymentBtn.addEventListener('click', async () => {
         if (!transactionInput.value.trim()) {
             alert('Please enter your Transaction ID for verification.');
             return;
         }
 
-        confirmPaymentBtn.innerText = 'Verifying...';
+        const transId = transactionInput.value.trim();
+        confirmPaymentBtn.innerText = 'Finalizing...';
         confirmPaymentBtn.disabled = true;
 
-        // Capture data and transaction ID
-        const transactionId = transactionInput.value;
-        console.log('Payment Confirmed. Transaction ID:', transactionId);
+        // Sync Transaction ID to Google Sheets
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+        data.transaction_id = transId;
+        await sendToGoogleSheets(data);
 
         // Final submission simulation
         setTimeout(() => {

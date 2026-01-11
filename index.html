@@ -168,12 +168,13 @@
                     <h2>Registration Form</h2>
                     <p>Please provide your details to secure your spot. Non-personal contact only.</p>
                     <!-- 
-                        ACTION REQUIRED: CONNECT YOUR EMAIL (ishaaq.raja@gmail.com)
-                        1. Create an account at https://formspree.io/
-                        2. Create a form and paste the link below instead of 'YOUR_ENDPOINT_HERE'
-                        3. Formspree will send you emails AND allow you to download an EXCEL file of all entries.
+                        ACTION REQUIRED: CONNECT YOUR GOOGLE SHEET
+                        1. Open a new Google Sheet.
+                        2. Go to Extensions -> Apps Script.
+                        3. Paste the code from SETUP.txt and click 'Deploy' as Web App.
+                        4. Copy the Web App URL and paste it in script.js (Line 52).
                     -->
-                    <form id="course-form" action="https://formspree.io/f/YOUR_ENDPOINT_HERE" method="POST">
+                    <form id="course-form">
                         <div class="form-grid">
                             <div class="form-group">
                                 <label for="email">Email Address</label>
