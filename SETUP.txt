@@ -13,45 +13,58 @@ This method is FASTER than Formspree and saves data directly into your Google Sh
 Delete everything in the script editor and paste this code:
 
 ```javascript
+// Google Apps Script Code
 function doPost(e) {
   try {
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
     var data = e.parameter;
     
-    // 1. Save Data to Sheet
-    // Create header row if the sheet is new
+    var fileUrl = "No File Uploaded";
+    
+    // 1. Handle File Upload (Payment Proof)
+    if (data.fileData && data.fileName) {
+      try {
+        var decoded = Utilities.base64Decode(data.fileData);
+        var blob = Utilities.newBlob(decoded, data.mimeType, data.fileName);
+        var file = DriveApp.createFile(blob);
+        file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+        fileUrl = file.getUrl();
+      } catch (fError) {
+        fileUrl = "Error saving file: " + fError.toString();
+      }
+    }
+    
+    // 2. Save Data to Sheet
     if (sheet.getLastRow() == 0) {
-      sheet.appendRow(["Timestamp", "Email", "Research Focus", "Proficiency", "OS", "Timing", "Group Size", "Transaction ID", "Comments", "Qualification", "Country", "Region", "City"]);
+      // Initialize Header
+      sheet.appendRow(["Timestamp", "Email", "Research Focus", "Proficiency", "OS", "Timing", "Group Size", "Transaction ID", "Comments", "Qualification", "Country", "Region", "City", "Payment Proof"]);
     }
     
     sheet.appendRow([
       new Date(), 
       data.email, 
-      data.background, 
-      data.experience, 
-      data.os, 
-      data.timing, 
-      data['group-size'], 
+      data.background || "-", 
+      data.experience || "-", 
+      data.os || "-", 
+      data.timing || "-", 
+      data['group-size'] || "1", 
       data.transaction_id || "PENDING", 
-      data.comments,
-      data.qualification,
-      data.country,
-      data.region,
-      data.city
+      data.comments || "-",
+      data.qualification || "-",
+      data.country || "-",
+      data.region || "-",
+      data.city || "-",
+      fileUrl
     ]);
     
-    // 2. Send Confirmation Email
-    if (data.email) {
+    // 3. Send Confirmation Email (Only on initial registration)
+    if (data.email && !data.type) { 
       var subject = "Registration Received: RNA-seq Course";
-      var body = "Hello,\n\nThank you for registering for the RNA-seq Analysis Course.\n\nWe have received your details safely.\n\n- Research Focus: " + data.background + "\n- Timing: " + data.timing + "\n\nIf you haven't completed the payment yet, please scan the QR code on the website to finish your enrollment.\n\nBest Regards,\nRNA-seq Course Team";
+      var body = "Hello,\n\nThank you for registering for the RNA-seq Analysis Course.\n\nWe have received your details safely.\n\nPLEASE COMPLETE PAYMENT to secure your spot.\n\nBest Regards,\nRNA-seq Course Team";
       
-      MailApp.sendEmail({
-        to: data.email,
-        subject: subject,
-        body: body
-      });
+      MailApp.sendEmail({to: data.email, subject: subject, body: body});
     }
-    
+
     return ContentService.createTextOutput("Success").setMimeType(ContentService.MimeType.TEXT);
     
   } catch (error) {
@@ -65,9 +78,11 @@ function authorizeEmail() {
   MailApp.sendEmail({
     to: email,
     subject: "Authorization Success",
-    body: "Your RNA-seq registration emails should now work!"
+    body: "Your RNA-seq registration emails (and Drive access) should now work!"
   });
   Logger.log("Test email sent to: " + email);
+  // Also try to access Drive to trigger permission prompt
+  var driveIterator = DriveApp.getFiles();
 }
 ```
 

@@ -108,27 +108,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Payment Confirmation (Step 2 -> Step 3)
     confirmPaymentBtn.addEventListener('click', async () => {
-        if (!transactionInput.value.trim()) {
-            alert('Please enter your Transaction ID for verification.');
+        const txnId = transactionInput.value.trim();
+        const fileInput = document.getElementById('payment-screenshot');
+        const file = fileInput.files[0];
+
+        if (!txnId && !file) {
+            alert('Please enter a Transaction ID or upload a screenshot.');
             return;
         }
 
-        const transId = transactionInput.value.trim();
-        confirmPaymentBtn.innerText = 'Finalizing...';
+        const originalText = confirmPaymentBtn.innerText;
+        confirmPaymentBtn.innerText = 'Verifying...';
         confirmPaymentBtn.disabled = true;
 
-        // Sync Transaction ID to Google Sheets
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
-        data.transaction_id = transId;
-        await sendToGoogleSheets(data);
+        const email = document.getElementById('email').value; // Get email from Step 1
+        
+        // Prepare payload
+        let payload = {
+            email: email,
+            transaction_id: txnId,
+            type: 'PAYMENT_PROOF'
+        };
 
-        // Final submission simulation
-        setTimeout(() => {
-            step2.classList.remove('active');
-            step3.classList.add('active');
-            window.scrollTo({ top: step3.offsetTop - 100, behavior: 'smooth' });
-        }, 1200);
+        const finishStep = () => {
+             setTimeout(() => {
+                step2.classList.remove('active');
+                step3.classList.add('active');
+                window.scrollTo({ top: step3.offsetTop - 100, behavior: 'smooth' });
+            }, 1200);
+        };
+
+        // File Handler
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = async function() {
+                // Send raw base64 string without data:image/ prefix
+                payload.fileData = reader.result.split(',')[1]; 
+                payload.mimeType = file.type;
+                payload.fileName = file.name;
+                
+                await sendToGoogleSheets(payload); 
+                finishStep();
+            };
+            reader.readAsDataURL(file);
+        } else {
+            await sendToGoogleSheets(payload);
+            finishStep();
+        }
     });
 
     // Back button
