@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updatePrice();
 
     // Google Sheets Configuration
-    const googleSheetURL = 'YOUR_GOOGLE_SHEET_URL_HERE'; // <-- REPLACE THIS LATER
+    const googleSheetURL = 'https://script.google.com/macros/s/AKfycbwj54jACeqNCASt7doCOrdX-fS-OTiVicZ2MHfBmG2392Fr2zwfydCwiRr041Lt5kLm/exec'; // <-- UPDATED WITH YOUR URL
 
     async function sendToGoogleSheets(data) {
         if (googleSheetURL === 'YOUR_GOOGLE_SHEET_URL_HERE') return;

@@ -57,9 +57,7 @@ function doPost(e) {
 7. **COPY THE WEB APP URL.**
 
 ### STEP 4: Link to Website
-1. Open `script.js` in your project folder.
-2. Go to **Line 52**.
-3. Replace `'YOUR_GOOGLE_SHEET_URL_HERE'` with the URL you just copied.
+- **DONE**: I have already updated `script.js` with your URL: `https://script.google.com/macros/s/AKfycbwj54jACeqNCASt7doCOrdX-fS-OTiVicZ2MHfBmG2392Fr2zwfydCwiRr041Lt5kLm/exec`
 
 ---
 
