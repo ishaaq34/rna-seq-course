@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RNA-seq Analysis: From Theory to Inference</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="logo">RNA-seq<span>2026</span></div>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#curriculum">Curriculum</a></li>
+          <li><a href="#register" class="cta-nav">Register Now</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-content">
+          <h1>
+            Introductory Course on <br /><span class="highlight"
+              >RNA-seq Analysis</span
+            >
+          </h1>
+          <p class="subtitle">
+            From raw data to biological inference. Understand the
+            <em>why</em> behind the workflow.
+          </p>
+          <div class="hero-meta">
+            <div class="meta-item">
+              <span class="icon">📅</span>
+              <span>Starts 1 Feb</span>
+            </div>
+            <div class="meta-item">
+              <span class="icon">💻</span>
+              <span>Online Course</span>
+            </div>
+            <div class="meta-item">
+              <span class="icon">💰</span>
+              <span>Just $1 (~100 Rs)</span>
+            </div>
+          </div>
+          <div class="hero-btns">
+            <a href="#register" class="btn btn-primary">Enroll Today</a>
+            <a href="#about" class="btn btn-secondary">Learn More</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="dna-strand"></div>
+          <div class="dna-strand"></div>
+          <div class="dna-strand"></div>
+        </div>
+      </section>
+
+      <section id="about" class="details">
+        <div class="container">
+          <h2>A Critical Approach to Genomics</h2>
+          <div class="grid">
+            <div class="card">
+              <h3>More than a Recipe</h3>
+              <p>
+                Analysis is often treated as mechanical. We treat it as a
+                statistical and biological inference problem. Move beyond just
+                running scripts.
+              </p>
+            </div>
+            <div class="card">
+              <h3>Understand Assumptions</h3>
+              <p>
+                Every step—QC, alignment, quantification—introduces assumptions.
+                Learn when they hold and when they fail.
+              </p>
+            </div>
+            <div class="card">
+              <h3>Biological Inference</h3>
+              <p>
+                Discover what RNA-seq actually measures and what claims are
+                truly justified by your data.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="pricing" class="pricing">
+        <div class="container">
+          <div class="pricing-card">
+            <span class="badge">Limited Offer</span>
+            <h2>Make your time worth it</h2>
+            <p class="price">$1 <span>/ ~100 Rs</span></p>
+            <div class="group-deal">
+              <h3>Join as a Group</h3>
+              <p>
+                Serious researchers work together. Bring your friends and save!
+              </p>
+              <ul>
+                <li>
+                  <strong>3 + 1</strong>: For every 3 friends, 1 joins free
+                </li>
+                <li>
+                  <strong>6 + 2</strong>: For every 6 friends, 2 join free
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="register" class="registration">
+        <div class="container">
+          <h2>Registration Form</h2>
+          <p>
+            Please provide your details to secure your spot. Non-personal
+            contact only.
+          </p>
+          <form id="course-form">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input
+                  type="email"
+                  id="email"
+                  id="email"
+                  required
+                  placeholder="your.research@email.com"
+                />
+              </div>
+              <div class="form-group">
+                <label for="background">Research Focus</label>
+                <select id="background" id="background" required>
+                  <option value="" disabled selected>Select Background</option>
+                  <option value="plants">Plants</option>
+                  <option value="animals">Animals</option>
+                  <option value="health">Human Health</option>
+                  <option value="microbiology">Microbiology</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="experience">Current Proficiency</label>
+                <select id="experience" id="experience" required>
+                  <option value="" disabled selected>
+                    How strong are you?
+                  </option>
+                  <option value="beginner">Beginner (Curious)</option>
+                  <option value="intermediate">
+                    Intermediate (Run some pipelines)
+                  </option>
+                  <option value="advanced">Advanced (Developing tools)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="os">Operating System</label>
+                <select id="os" id="os" required>
+                  <option value="" disabled selected>
+                    System you are using
+                  </option>
+                  <option value="linux">Linux</option>
+                  <option value="windows">Windows</option>
+                  <option value="mac">macOS</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="timing">Preferred Timing</label>
+                <select id="timing" id="timing" required>
+                  <option value="" disabled selected>What suits best?</option>
+                  <option value="morning">Morning (09:00 - 12:00)</option>
+                  <option value="afternoon">Afternoon (14:00 - 17:00)</option>
+                  <option value="evening">Evening (19:00 - 22:00)</option>
+                </select>
+              </div>
+              <div class="form-group full-width">
+                <label for="comments">Optional Comments / Questions</label>
+                <textarea
+                  id="comments"
+                  id="comments"
+                  rows="3"
+                  placeholder="Anything else we should know?"
+                ></textarea>
+              </div>
+            </div>
+            <div class="form-footer">
+              <div id="calculator" class="calculator">
+                <p>
+                  Group count:
+                  <input type="number" id="group-size" value="1" min="1" />
+                </p>
+                <p id="calc-result">Total: $1.00 (~100 Rs)</p>
+              </div>
+              <button type="submit" class="btn btn-primary">
+                Submit Registration
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 RNA-seq Course Initiative. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
