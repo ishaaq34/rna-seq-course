@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // BHIM UPI Link Generator
     // CONFIGURATION: Set your UPI ID (VPA) and Name below
-    const upiID = 'raja.khan@okaxis'; // <-- REPLACE THIS WITH YOUR UPI ID (e.g., yourname@upi)
-    const payeeName = 'RNAseq Course'; // <-- REPLACE THIS WITH YOUR NAME
+    const upiID = '6006393231@upi'; // <-- UPDATED WITH YOUR ID
+    const payeeName = 'RNA-seq Course'; // <-- Change this to your preferred name
 
     const updateUPILink = (amount) => {
         // Amount in INR (amount * 100)
