@@ -21,13 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const payeeName = 'RNA-seq Course'; // <-- Change this to your preferred name
 
     const updateUPILink = (amount) => {
+        if (!upiBtn) return;
         // Amount in INR (amount * 100)
         const inrAmount = amount * 100;
         const upiLink = `upi://pay?pa=${upiID}&pn=${encodeURIComponent(payeeName)}&am=${inrAmount}&cu=INR&tn=${encodeURIComponent('RNA-seq Course Registration')}`;
         upiBtn.setAttribute('href', upiLink);
-        
-        // On desktop, we can also update a QR code generation service URL if needed,
-        // but for now, we leave the placeholder image.
     };
 
     // Group discount calculator logic
