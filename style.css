@@ -496,6 +496,72 @@ footer {
     font-weight: 800;
 }
 
+/* Payment Gateway & UPI Styles */
+.payment-gateway {
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.method-label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #94a3b8;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.gateway-help {
+    font-size: 0.8rem;
+    color: #64748b;
+    margin-top: 0.5rem;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 2rem 0;
+    color: #475569;
+}
+
+.divider::before, .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--glass-border);
+}
+
+.divider span {
+    padding: 0 1rem;
+    font-size: 0.8rem;
+    font-weight: 800;
+}
+
+.upi-payment {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.btn-upi {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    background: white;
+    color: #0f172a !important;
+    width: 100%;
+    padding: 1.25rem;
+    border-radius: 12px;
+}
+
+.upi-icon-btn {
+    height: 24px;
+}
+
 .payment-methods {
     display: flex;
     flex-direction: column;
@@ -509,6 +575,12 @@ footer {
     padding: 1.5rem;
     border-radius: 16px;
     width: fit-content;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.transaction-verification {
+    text-align: left;
+    margin-bottom: 2rem;
 }
 
 #payment-qr {

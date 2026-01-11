@@ -222,12 +222,31 @@
                         <p>Total Amount: <span id="final-amount">$1.00 (~100 Rs)</span></p>
                         
                         <div class="payment-methods">
-                            <div class="qr-container">
-                                <img src="qr_placeholder.png" alt="Payment QR Code" id="payment-qr">
-                                <p class="qr-label">Scan to pay via GPay / UPI</p>
+                            <!-- Razorpay Payment Button Placeholder -->
+                            <div class="payment-gateway">
+                                <p class="method-label">Option 1: Secured Payment Portal (RBI Approved)</p>
+                                <div id="razorpay-button-container">
+                                    <form>
+                                        <script src="https://checkout.razorpay.com/v1/payment-button.js" 
+                                            data-payment_button_id="pl_PLACEHOLDER_ID" async> </script>
+                                    </form>
+                                    <p class="gateway-help">Pay via Cards, NetBanking, Wallets (Razorpay)</p>
+                                </div>
                             </div>
-                            <div class="payment-manual">
-                                <p>Or pay via PayPal: <br><strong>research.course@paypal.me</strong></p>
+
+                            <div class="divider"><span>OR</span></div>
+
+                            <!-- BHIM UPI Direct Option -->
+                            <div class="upi-payment">
+                                <p class="method-label">Option 2: Direct UPI Payment (Fastest)</p>
+                                <a href="#" id="bhim-pay-link" class="btn btn-upi">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/UPI-Logo.png" alt="UPI" class="upi-icon-btn">
+                                    Pay with BHIM / Any UPI app
+                                </a>
+                                <div class="qr-container">
+                                    <img src="qr_placeholder.png" alt="Payment QR Code" id="payment-qr">
+                                    <p class="qr-label">Scan to pay via GPay / UPI</p>
+                                </div>
                             </div>
                         </div>
 

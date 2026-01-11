@@ -14,6 +14,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const backToRegBtn = document.getElementById('back-to-reg');
     const transactionInput = document.getElementById('transaction-id');
 
+    // BHIM UPI Link Generator
+    const upiBtn = document.getElementById('bhim-pay-link');
+    const upiID = 'raja.khan@okaxis'; // Placeholder UPI ID
+    const payeeName = 'RNAseq Course';
+
+    const updateUPILink = (amount) => {
+        // Amount in INR (amount * 100)
+        const inrAmount = amount * 100;
+        const upiLink = `upi://pay?pa=${upiID}&pn=${encodeURIComponent(payeeName)}&am=${inrAmount}&cu=INR&tn=${encodeURIComponent('RNA-seq Course Registration')}`;
+        upiBtn.setAttribute('href', upiLink);
+        
+        // On desktop, we can also update a QR code generation service URL if needed,
+        // but for now, we leave the placeholder image.
+    };
+
     // Group discount calculator logic
     const updatePrice = () => {
         const count = parseInt(groupInput.value) || 1;
@@ -24,9 +39,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const priceText = `$${totalPrice.toFixed(2)} (~${totalPrice * 100} Rs)`;
         calcResult.innerHTML = `Total: ${priceText} <br><small>${freeSpots > 0 ? freeSpots + ' Free spot(s) included!' : ''}</small>`;
         finalAmount.innerText = priceText;
+        
+        // Update UPI Deep Link
+        updateUPILink(totalPrice);
     };
 
     groupInput.addEventListener('input', updatePrice);
+    
+    // Initial price set
+    updatePrice();
 
     // Form submission (Step 1 -> Step 2)
     form.addEventListener('submit', async (e) => {
@@ -36,10 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.innerText = 'Capturing Details...';
         btn.disabled = true;
 
-        // Note: Real Formspree submission would happen here.
-        // For now, we simulate success and move to payment step.
-        // To enable real submission, ensure your.email is set in action attribute.
-        
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
         console.log('Registration details captured:', data);
