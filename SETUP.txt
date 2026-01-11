@@ -66,9 +66,13 @@ I have moved your sensitive info to **GitHub Secrets**. This keeps your code cle
 
 ### STEP 5: Add Secrets to GitHub
 1. Open your repository on GitHub.com.
-2. Go to **Settings** -> **Secrets and variables** -> **Actions**.
-3. Click **New repository secret**.
-4. Add these two secrets:
-   - **Name**: `UPI_ID` | **Value**: `6006393231@upi`
-   - **Name**: `GOOGLE_SHEET_URL` | **Value**: `https://script.google.com/macros/s/AKfycbwj54jACeqNCASt7doCOrdX-fS-OTiVicZ2MHfBmG2392Fr2zwfydCwiRr041Lt5kLm/exec`
-5. Once you add these, my automated script will build your site safely every time you push code!
+2. Go to **Settings** (top tab) -> **Secrets and variables** (left menu) -> **Actions**.
+3. Click the green button: **"New repository secret"**.
+4. Add the first secret:
+   - **Name**: `UPI_ID` (Uppercase, NO spaces, NO dots)
+   - **Value**: `6006393231@upi`
+5. Click **"Add secret"**.
+6. Click **"New repository secret"** again for the second one:
+   - **Name**: `GOOGLE_SHEET_URL` (Uppercase, NO spaces, uses underscores `_`)
+   - **Value**: `https://script.google.com/macros/s/AKfycbwj54jACeqNCASt7doCOrdX-fS-OTiVicZ2MHfBmG2392Fr2zwfydCwiRr041Lt5kLm/exec`
+7. Click **"Add secret"**.
