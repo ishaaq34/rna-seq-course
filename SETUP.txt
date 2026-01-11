@@ -14,30 +14,69 @@ Delete everything in the script editor and paste this code:
 
 ```javascript
 function doPost(e) {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  var data = e.parameter;
-  
-  // Create header row if the sheet is new
-  if (sheet.getLastRow() == 0) {
-    sheet.appendRow(["Timestamp", "Email", "Research Focus", "Proficiency", "OS", "Timing", "Group Size", "Transaction ID", "Comments"]);
+  try {
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    var data = e.parameter;
+    
+    // 1. Save Data to Sheet
+    // Create header row if the sheet is new
+    if (sheet.getLastRow() == 0) {
+      sheet.appendRow(["Timestamp", "Email", "Research Focus", "Proficiency", "OS", "Timing", "Group Size", "Transaction ID", "Comments", "Qualification", "Country", "Region", "City"]);
+    }
+    
+    sheet.appendRow([
+      new Date(), 
+      data.email, 
+      data.background, 
+      data.experience, 
+      data.os, 
+      data.timing, 
+      data['group-size'], 
+      data.transaction_id || "PENDING", 
+      data.comments,
+      data.qualification,
+      data.country,
+      data.region,
+      data.city
+    ]);
+    
+    // 2. Send Confirmation Email
+    if (data.email) {
+      var subject = "Registration Received: RNA-seq Course";
+      var body = "Hello,\n\nThank you for registering for the RNA-seq Analysis Course.\n\nWe have received your details safely.\n\n- Research Focus: " + data.background + "\n- Timing: " + data.timing + "\n\nIf you haven't completed the payment yet, please scan the QR code on the website to finish your enrollment.\n\nBest Regards,\nRNA-seq Course Team";
+      
+      MailApp.sendEmail({
+        to: data.email,
+        subject: subject,
+        body: body
+      });
+    }
+    
+    return ContentService.createTextOutput("Success").setMimeType(ContentService.MimeType.TEXT);
+    
+  } catch (error) {
+    return ContentService.createTextOutput("Error: " + error.toString()).setMimeType(ContentService.MimeType.TEXT);
   }
-  
-  // Append the data
-  sheet.appendRow([
-    new Date(), 
-    data.email, 
-    data.background, 
-    data.experience, 
-    data.os, 
-    data.timing, 
-    data['group-size'], 
-    data.transaction_id || "PENDING", 
-    data.comments
-  ]);
-  
-  return ContentService.createTextOutput("Success").setMimeType(ContentService.MimeType.TEXT);
+}
+
+// --- PERMISSION HELPER ---
+function authorizeEmail() {
+  var email = Session.getActiveUser().getEmail();
+  MailApp.sendEmail({
+    to: email,
+    subject: "Authorization Success",
+    body: "Your RNA-seq registration emails should now work!"
+  });
+  Logger.log("Test email sent to: " + email);
 }
 ```
+
+### STEP 2b: Authorize Email (Fix for missing notifications)
+1.  Select **authorizeEmail** from the dropdown menu (next to the "Debug" button).
+2.  Click **Run**.
+3.  You will likely see a **"Review Permissions"** popup.
+4.  Click **Review Permissions** -> Account -> **Advanced** -> **Go to ... (unsafe)** -> **Allow**.
+5.  Check your inbox for the "Authorization Success" email.
 
 ### STEP 3: Deploy as Web App
 1. Click the **Deploy** button (top right) -> **New deployment**.

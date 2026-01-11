@@ -1,4 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Auto-detect Location
+    const fetchLocation = async () => {
+        try {
+            const response = await fetch('https://ipapi.co/json/');
+            const data = await response.json();
+            if (data.country_name) document.getElementById('country').value = data.country_name;
+            if (data.region) document.getElementById('region').value = data.region;
+            if (data.city) document.getElementById('city').value = data.city;
+            console.log('Location detected:', data.city, data.country_name);
+        } catch (error) {
+            console.warn('Location detection failed:', error);
+        }
+    };
+    fetchLocation();
+
     const groupInput = document.getElementById('group-size');
     const calcResult = document.getElementById('calc-result');
     const form = document.getElementById('course-form');
