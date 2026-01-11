@@ -15,11 +15,18 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Inject Secrets
+        env:
+          UPI_ID: ${{ secrets.UPI_ID }}
+          GOOGLE_SHEET_URL: ${{ secrets.GOOGLE_SHEET_URL }}
         run: |
-          sed -i "s|{{UPI_ID}}|${{ secrets.UPI_ID }}|g" script.js
-          sed -i "s|{{GOOGLE_SHEET_URL}}|${{ secrets.GOOGLE_SHEET_URL }}|g" script.js
-          # Also handle any placeholders in index.html if needed
-          sed -i "s|{{RAZORPAY_BUTTON_ID}}|${{ secrets.RAZORPAY_BUTTON_ID }}|g" index.html
+          sed -i "s|{{UPI_ID}}|$UPI_ID|g" script.js
+          sed -i "s|{{GOOGLE_SHEET_URL}}|$GOOGLE_SHEET_URL|g" script.js
+
+      - name: Verify Secret Injection
+        run: |
+          if grep -q "{{UPI_ID}}" script.js; then echo "Error: UPI_ID placeholder still present"; exit 1; fi
+          if grep -q "{{GOOGLE_SHEET_URL}}" script.js; then echo "Error: GOOGLE_SHEET_URL placeholder still present"; exit 1; fi
+          echo "Verification successful: No placeholders found."
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4

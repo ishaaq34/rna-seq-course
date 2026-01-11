@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const confirmPaymentBtn = document.getElementById('confirm-payment');
     const backToRegBtn = document.getElementById('back-to-reg');
     const transactionInput = document.getElementById('transaction-id');
+    const upiBtn = document.getElementById('bhim-pay-link');
 
     // BHIM UPI Link Generator
     // CONFIGURATION: Set your UPI ID (VPA) and Name below
