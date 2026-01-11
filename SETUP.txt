@@ -1,0 +1,78 @@
+# RNA-seq Course: 1-Minute Google Sheets Setup
+
+This method is FASTER than Formspree and saves data directly into your Google Sheet.
+
+---
+
+### STEP 1: Prepare the Google Sheet
+1. Open a new [Google Sheet](https://sheets.new/).
+2. Name it "RNA-seq Registrations".
+3. Click on **Extensions** -> **Apps Script**.
+
+### STEP 2: Paste the Script
+Delete everything in the script editor and paste this code:
+
+```javascript
+function doPost(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var data = e.parameter;
+  
+  // Create header row if the sheet is new
+  if (sheet.getLastRow() == 0) {
+    sheet.appendRow(["Timestamp", "Email", "Research Focus", "Proficiency", "OS", "Timing", "Group Size", "Transaction ID", "Comments"]);
+  }
+  
+  // Append the data
+  sheet.appendRow([
+    new Date(), 
+    data.email, 
+    data.background, 
+    data.experience, 
+    data.os, 
+    data.timing, 
+    data['group-size'], 
+    data.transaction_id || "PENDING", 
+    data.comments
+  ]);
+  
+  return ContentService.createTextOutput("Success").setMimeType(ContentService.MimeType.TEXT);
+}
+```
+
+### STEP 3: Deploy as Web App
+1. Click the **Deploy** button (top right) -> **New deployment**.
+2. Select type: **Web App**.
+3. Description: "Form Submission".
+4. Execute as: **Me** (your email).
+5. Who has access: **Anyone** (This is required for the form to work).
+6. Click **Deploy**.
+
+> [!IMPORTANT]
+> **If you see "Google hasn't verified this app":**
+> 1. Click **Advanced**.
+> 2. Click **Go to [Project Name] (unsafe)** at the bottom left.
+> 3. Click **Allow**.
+> *This is normal because the script is private and created by you.*
+
+7. **COPY THE WEB APP URL.**
+
+### STEP 4: Link to Website
+- **DONE**: I have already updated `script.js` with your URL: `https://script.google.com/macros/s/AKfycbwj54jACeqNCASt7doCOrdX-fS-OTiVicZ2MHfBmG2392Fr2zwfydCwiRr041Lt5kLm/exec`
+
+---
+
+## � Security: How to hide your UPI and Sheet URL
+I have moved your sensitive info to **GitHub Secrets**. This keeps your code clean on GitHub while keeping your site working.
+
+### STEP 5: Add Secrets to GitHub
+1. Open your repository on GitHub.com.
+2. Go to **Settings** (top tab) -> **Secrets and variables** (left menu) -> **Actions**.
+3. Click the green button: **"New repository secret"**.
+4. Add the first secret:
+   - **Name**: `UPI_ID` (Uppercase, NO spaces, NO dots)
+   - **Value**: `6006393231@upi`
+5. Click **"Add secret"**.
+6. Click **"New repository secret"** again for the second one:
+   - **Name**: `GOOGLE_SHEET_URL` (Uppercase, NO spaces, uses underscores `_`)
+   - **Value**: `https://script.google.com/macros/s/AKfycbwj54jACeqNCASt7doCOrdX-fS-OTiVicZ2MHfBmG2392Fr2zwfydCwiRr041Lt5kLm/exec`
+7. Click **"Add secret"**.
