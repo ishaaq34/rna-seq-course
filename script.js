@@ -15,9 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const transactionInput = document.getElementById('transaction-id');
 
     // BHIM UPI Link Generator
-    const upiBtn = document.getElementById('bhim-pay-link');
-    const upiID = 'raja.khan@okaxis'; // Placeholder UPI ID
-    const payeeName = 'RNAseq Course';
+    // CONFIGURATION: Set your UPI ID (VPA) and Name below
+    const upiID = 'raja.khan@okaxis'; // <-- REPLACE THIS WITH YOUR UPI ID (e.g., yourname@upi)
+    const payeeName = 'RNAseq Course'; // <-- REPLACE THIS WITH YOUR NAME
 
     const updateUPILink = (amount) => {
         // Amount in INR (amount * 100)

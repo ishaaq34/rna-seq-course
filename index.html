@@ -217,7 +217,13 @@
                 <div class="step active" id="step-1">
                     <h2>Registration Form</h2>
                     <p>Please provide your details to secure your spot. Non-personal contact only.</p>
-                    <form id="course-form" action="https://formspree.io/f/YOUR_ENDPOINT_HERE" method="POST">
+                    <!-- 
+                    CONFIGURATION: FORMSPREE DATA CAPTURE
+                    1. Create a free account at https://formspree.io/
+                    2. Create a form and copy your unique Endpoint URL
+                    3. Replace 'YOUR_ENDPOINT_HERE' below with your URL
+                -->
+                <form id="course-form" action="https://formspree.io/f/YOUR_ENDPOINT_HERE" method="POST">
                         <div class="form-grid">
                             <div class="form-group">
                                 <label for="email">Email Address</label>
@@ -287,6 +293,11 @@
                                 <p class="method-label">Option 1: Secured Payment Portal (RBI Approved)</p>
                                 <div id="razorpay-button-container">
                                     <form>
+                                        <!-- 
+                                            CONFIGURATION: RAZORPAY PAYMENT BUTTON
+                                            1. Create a Payment Button in your Razorpay Dashboard
+                                            2. Replace 'pl_PLACEHOLDER_ID' below with your Button ID
+                                        -->
                                         <script src="https://checkout.razorpay.com/v1/payment-button.js" 
                                             data-payment_button_id="pl_PLACEHOLDER_ID" async> </script>
                                     </form>
