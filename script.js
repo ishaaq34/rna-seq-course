@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // BHIM UPI Link Generator
     // CONFIGURATION: Set your UPI ID (VPA) and Name below
-    const upiID = '6006393231@upi'; // <-- UPDATED WITH YOUR ID
+    const upiID = '{{UPI_ID}}'; // <-- INJECTED SECURELY
     const payeeName = 'RNA-seq Course'; // <-- Change this to your preferred name
 
     const updateUPILink = (amount) => {
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updatePrice();
 
     // Google Sheets Configuration
-    const googleSheetURL = 'https://script.google.com/macros/s/AKfycbwj54jACeqNCASt7doCOrdX-fS-OTiVicZ2MHfBmG2392Fr2zwfydCwiRr041Lt5kLm/exec'; // <-- UPDATED WITH YOUR URL
+    const googleSheetURL = '{{GOOGLE_SHEET_URL}}'; // <-- INJECTED SECURELY
 
     async function sendToGoogleSheets(data) {
         if (googleSheetURL === 'YOUR_GOOGLE_SHEET_URL_HERE') return;
