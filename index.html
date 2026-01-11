@@ -253,8 +253,8 @@
                                         <script src="https://checkout.razorpay.com/v1/payment-button.js" 
                                             data-payment_button_id="pl_PLACEHOLDER_ID" async> </script>
                                         
-                                        <!-- Error Fallback Message -->
-                                        <div class="setup-required-notice" style="padding: 1rem; border: 1px dashed #ef4444; border-radius: 8px; margin: 1rem 0;">
+                                        <!-- Error Fallback Message (Hidden for now) -->
+                                        <div class="setup-required-notice" style="padding: 1rem; border: 1px dashed #ef4444; border-radius: 8px; margin: 1rem 0; display: none;">
                                             <p style="color: #ef4444; margin: 0; font-size: 0.9rem;">
                                                 <strong>Setup Required:</strong> Replace 'pl_PLACEHOLDER_ID' in index.html with your Razorpay Button ID to activate this portal.
                                             </p>
@@ -266,7 +266,6 @@
 
                             <div class="divider"><span>OR</span></div>
 
-                            <!-- BHIM UPI Direct Option -->
                             <div class="upi-payment">
                                 <p class="method-label">Option 2: Direct UPI Payment (Fastest)</p>
                                 <a href="#" id="bhim-pay-link" class="btn btn-upi">
@@ -274,7 +273,7 @@
                                     Pay with BHIM / Any UPI app
                                 </a>
                                 <div class="qr-container">
-                                    <img src="qr_placeholder.png" alt="Payment QR Code" id="payment-qr">
+                                    <img src="payment-qr.jpg" alt="Payment QR Code" id="payment-qr" style="max-width: 200px; border-radius: 10px;">
                                     <p class="qr-label">Scan to pay via GPay / UPI</p>
                                 </div>
                             </div>
