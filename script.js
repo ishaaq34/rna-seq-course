@@ -1,65 +1,94 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const groupInput = document.getElementById("group-size");
-  const calcResult = document.getElementById("calc-result");
-  const form = document.getElementById("course-form");
+document.addEventListener('DOMContentLoaded', () => {
+    const groupInput = document.getElementById('group-size');
+    const calcResult = document.getElementById('calc-result');
+    const form = document.getElementById('course-form');
+    const finalAmount = document.getElementById('final-amount');
+    
+    // Steps
+    const step1 = document.getElementById('step-1');
+    const step2 = document.getElementById('step-2');
+    const step3 = document.getElementById('step-3');
+    
+    // Buttons
+    const confirmPaymentBtn = document.getElementById('confirm-payment');
+    const backToRegBtn = document.getElementById('back-to-reg');
+    const transactionInput = document.getElementById('transaction-id');
 
-  // Group discount calculator logic
-  const updatePrice = () => {
-    const count = parseInt(groupInput.value) || 1;
+    // Group discount calculator logic
+    const updatePrice = () => {
+        const count = parseInt(groupInput.value) || 1;
+        const freeSpots = Math.floor(count / 4);
+        const payableSpots = count - freeSpots;
+        const totalPrice = payableSpots;
 
-    // Logic: every 3 friends (total 4), 1 is free
-    // 3+1 = 4 people, pay for 3 ($3)
-    // 6+2 = 8 people, pay for 6 ($6)
+        const priceText = `$${totalPrice.toFixed(2)} (~${totalPrice * 100} Rs)`;
+        calcResult.innerHTML = `Total: ${priceText} <br><small>${freeSpots > 0 ? freeSpots + ' Free spot(s) included!' : ''}</small>`;
+        finalAmount.innerText = priceText;
+    };
 
-    const freeSpots = Math.floor(count / 4);
-    const payableSpots = count - freeSpots;
-    const totalPrice = payableSpots;
+    groupInput.addEventListener('input', updatePrice);
 
-    calcResult.innerHTML = `Total: $${totalPrice.toFixed(2)} (~${
-      totalPrice * 100
-    } Rs) <br><small>${
-      freeSpots > 0 ? freeSpots + " Free spot(s) included!" : ""
-    }</small>`;
-  };
+    // Form submission (Step 1 -> Step 2)
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const btn = form.querySelector('button');
+        btn.innerText = 'Capturing Details...';
+        btn.disabled = true;
 
-  groupInput.addEventListener("input", updatePrice);
+        // Note: Real Formspree submission would happen here.
+        // For now, we simulate success and move to payment step.
+        // To enable real submission, ensure your.email is set in action attribute.
+        
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+        console.log('Registration details captured:', data);
 
-  // Form submission
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
-    data.groupSize = groupInput.value;
-
-    console.log("Registration Data Captured:", data);
-
-    // Visual feedback
-    const btn = form.querySelector("button");
-    const originalText = btn.innerText;
-    btn.innerText = "Registration Sent!";
-    btn.style.background = "var(--secondary)";
-    btn.disabled = true;
-
-    alert(
-      "Thank you for registering! We have captured your details. Since this is a local preview, your data is logged to the console."
-    );
-
-    setTimeout(() => {
-      btn.innerText = originalText;
-      btn.style.background =
-        "linear-gradient(135deg, var(--primary), var(--accent))";
-      btn.disabled = false;
-    }, 3000);
-  });
-
-  // Smooth scroll for nav links
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
-      e.preventDefault();
-      document.querySelector(this.getAttribute("href")).scrollIntoView({
-        behavior: "smooth",
-      });
+        setTimeout(() => {
+            step1.classList.remove('active');
+            step2.classList.add('active');
+            window.scrollTo({ top: step2.offsetTop - 100, behavior: 'smooth' });
+        }, 800);
     });
-  });
+
+    // Payment Confirmation (Step 2 -> Step 3)
+    confirmPaymentBtn.addEventListener('click', () => {
+        if (!transactionInput.value.trim()) {
+            alert('Please enter your Transaction ID for verification.');
+            return;
+        }
+
+        confirmPaymentBtn.innerText = 'Verifying...';
+        confirmPaymentBtn.disabled = true;
+
+        // Capture data and transaction ID
+        const transactionId = transactionInput.value;
+        console.log('Payment Confirmed. Transaction ID:', transactionId);
+
+        // Final submission simulation
+        setTimeout(() => {
+            step2.classList.remove('active');
+            step3.classList.add('active');
+            window.scrollTo({ top: step3.offsetTop - 100, behavior: 'smooth' });
+        }, 1200);
+    });
+
+    // Back button
+    backToRegBtn.addEventListener('click', () => {
+        step2.classList.remove('active');
+        step1.classList.add('active');
+        form.querySelector('button').innerText = 'Proceed to Payment';
+        form.querySelector('button').disabled = false;
+    });
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
 });

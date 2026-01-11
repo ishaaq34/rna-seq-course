@@ -116,94 +116,106 @@
         </div>
       </section>
 
-      <section id="register" class="registration">
-        <div class="container">
-          <h2>Registration Form</h2>
-          <p>
-            Please provide your details to secure your spot. Non-personal
-            contact only.
-          </p>
-          <form id="course-form">
-            <div class="form-grid">
-              <div class="form-group">
-                <label for="email">Email Address</label>
-                <input
-                  type="email"
-                  id="email"
-                  id="email"
-                  required
-                  placeholder="your.research@email.com"
-                />
-              </div>
-              <div class="form-group">
-                <label for="background">Research Focus</label>
-                <select id="background" id="background" required>
-                  <option value="" disabled selected>Select Background</option>
-                  <option value="plants">Plants</option>
-                  <option value="animals">Animals</option>
-                  <option value="health">Human Health</option>
-                  <option value="microbiology">Microbiology</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="experience">Current Proficiency</label>
-                <select id="experience" id="experience" required>
-                  <option value="" disabled selected>
-                    How strong are you?
-                  </option>
-                  <option value="beginner">Beginner (Curious)</option>
-                  <option value="intermediate">
-                    Intermediate (Run some pipelines)
-                  </option>
-                  <option value="advanced">Advanced (Developing tools)</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="os">Operating System</label>
-                <select id="os" id="os" required>
-                  <option value="" disabled selected>
-                    System you are using
-                  </option>
-                  <option value="linux">Linux</option>
-                  <option value="windows">Windows</option>
-                  <option value="mac">macOS</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="timing">Preferred Timing</label>
-                <select id="timing" id="timing" required>
-                  <option value="" disabled selected>What suits best?</option>
-                  <option value="morning">Morning (09:00 - 12:00)</option>
-                  <option value="afternoon">Afternoon (14:00 - 17:00)</option>
-                  <option value="evening">Evening (19:00 - 22:00)</option>
-                </select>
-              </div>
-              <div class="form-group full-width">
-                <label for="comments">Optional Comments / Questions</label>
-                <textarea
-                  id="comments"
-                  id="comments"
-                  rows="3"
-                  placeholder="Anything else we should know?"
-                ></textarea>
-              </div>
+        <section id="register" class="registration">
+            <div class="container" id="steps-wrapper">
+                <div class="step active" id="step-1">
+                    <h2>Registration Form</h2>
+                    <p>Please provide your details to secure your spot. Non-personal contact only.</p>
+                    <form id="course-form" action="https://formspree.io/f/YOUR_ENDPOINT_HERE" method="POST">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" required placeholder="your.research@email.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="background">Research Focus</label>
+                                <select id="background" name="background" required>
+                                    <option value="" disabled selected>Select Background</option>
+                                    <option value="plants">Plants</option>
+                                    <option value="animals">Animals</option>
+                                    <option value="health">Human Health</option>
+                                    <option value="microbiology">Microbiology</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="experience">Current Proficiency</label>
+                                <select id="experience" name="experience" required>
+                                    <option value="" disabled selected>How strong are you?</option>
+                                    <option value="beginner">Beginner (Curious)</option>
+                                    <option value="intermediate">Intermediate (Run some pipelines)</option>
+                                    <option value="advanced">Advanced (Developing tools)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="os">Operating System</label>
+                                <select id="os" name="os" required>
+                                    <option value="" disabled selected>System you are using</option>
+                                    <option value="linux">Linux</option>
+                                    <option value="windows">Windows</option>
+                                    <option value="mac">macOS</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="timing">Preferred Timing</label>
+                                <select id="timing" name="timing" required>
+                                    <option value="" disabled selected>What suits best?</option>
+                                    <option value="morning">Morning (09:00 - 12:00)</option>
+                                    <option value="afternoon">Afternoon (14:00 - 17:00)</option>
+                                    <option value="evening">Evening (19:00 - 22:00)</option>
+                                </select>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="comments">Optional Comments / Questions</label>
+                                <textarea id="comments" name="comments" rows="3" placeholder="Anything else we should know?"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-footer">
+                            <div id="calculator" class="calculator">
+                                <p>Group count: <input type="number" id="group-size" name="group-size" value="1" min="1"></p>
+                                <p id="calc-result">Total: $1.00 (~100 Rs)</p>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Proceed to Payment</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="step" id="step-2">
+                    <div class="payment-card">
+                        <h2>Complete Your Payment</h2>
+                        <p>Total Amount: <span id="final-amount">$1.00 (~100 Rs)</span></p>
+                        
+                        <div class="payment-methods">
+                            <div class="qr-container">
+                                <img src="qr_placeholder.png" alt="Payment QR Code" id="payment-qr">
+                                <p class="qr-label">Scan to pay via GPay / UPI</p>
+                            </div>
+                            <div class="payment-manual">
+                                <p>Or pay via PayPal: <br><strong>research.course@paypal.me</strong></p>
+                            </div>
+                        </div>
+
+                        <div class="transaction-verification">
+                            <label for="transaction-id">Transaction ID / Reference Number</label>
+                            <input type="text" id="transaction-id" placeholder="Enter ID for verification" required>
+                            <p class="help-text">We'll verify this to confirm your registration.</p>
+                        </div>
+
+                        <button id="confirm-payment" class="btn btn-primary">Finish Registration</button>
+                        <button id="back-to-reg" class="btn btn-secondary">Back to Details</button>
+                    </div>
+                </div>
+
+                <div class="step" id="step-3">
+                    <div class="success-message">
+                        <div class="success-icon">✓</div>
+                        <h2>Registration Successful!</h2>
+                        <p>Thank you for joining the RNA-seq course. We will verify your transaction and send a confirmation email within 24 hours.</p>
+                        <a href="#" onclick="location.reload()" class="btn btn-primary">Done</a>
+                    </div>
+                </div>
             </div>
-            <div class="form-footer">
-              <div id="calculator" class="calculator">
-                <p>
-                  Group count:
-                  <input type="number" id="group-size" value="1" min="1" />
-                </p>
-                <p id="calc-result">Total: $1.00 (~100 Rs)</p>
-              </div>
-              <button type="submit" class="btn btn-primary">
-                Submit Registration
-              </button>
-            </div>
-          </form>
-        </div>
-      </section>
+        </section>
     </main>
 
     <footer>

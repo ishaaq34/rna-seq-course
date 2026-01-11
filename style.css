@@ -408,6 +408,118 @@ footer {
   color: #475569;
 }
 
+/* Registration Flow Steps */
+.step {
+    display: none;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.step.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Payment Card */
+.payment-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    padding: 3rem;
+    border-radius: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.payment-card h2 {
+    margin-bottom: 0.5rem;
+}
+
+#final-amount {
+    color: var(--primary);
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.payment-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 2.5rem 0;
+    align-items: center;
+}
+
+.qr-container {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 16px;
+    width: fit-content;
+}
+
+#payment-qr {
+    max-width: 200px;
+    display: block;
+}
+
+.qr-label {
+    color: var(--dark);
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-top: 0.5rem;
+}
+
+.payment-manual {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 12px;
+    width: 100%;
+}
+
+.transaction-verification {
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+.transaction-verification input {
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.help-text {
+    font-size: 0.8rem;
+    color: #64748b;
+    margin-top: 0.5rem;
+}
+
+/* Success Message */
+.success-message {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--secondary);
+    color: var(--dark);
+    font-size: 3rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2rem;
+    font-weight: 800;
+}
+
+#back-to-reg {
+    margin-top: 1rem;
+    display: block;
+    width: 100%;
+}
+
 @media (max-width: 968px) {
   .hero {
     flex-direction: column;
