@@ -168,12 +168,12 @@
                     <h2>Registration Form</h2>
                     <p>Please provide your details to secure your spot. Non-personal contact only.</p>
                     <!-- 
-                    CONFIGURATION: FORMSPREE DATA CAPTURE
-                    1. Create a free account at https://formspree.io/
-                    2. Create a form and copy your unique Endpoint URL
-                    3. Replace 'YOUR_ENDPOINT_HERE' below with your URL
-                -->
-                <form id="course-form" action="https://formspree.io/f/YOUR_ENDPOINT_HERE" method="POST">
+                        ACTION REQUIRED: CONNECT YOUR EMAIL
+                        The registration data will go to YOUR email.
+                        1. Create an account at https://formspree.io/
+                        2. Create a form and paste the link below instead of 'YOUR_ENDPOINT_HERE'
+                    -->
+                    <form id="course-form" action="https://formspree.io/f/YOUR_ENDPOINT_HERE" method="POST">
                         <div class="form-grid">
                             <div class="form-group">
                                 <label for="email">Email Address</label>
@@ -244,12 +244,20 @@
                                 <div id="razorpay-button-container">
                                     <form>
                                         <!-- 
-                                            CONFIGURATION: RAZORPAY PAYMENT BUTTON
-                                            1. Create a Payment Button in your Razorpay Dashboard
-                                            2. Replace 'pl_PLACEHOLDER_ID' below with your Button ID
+                                            ACTION REQUIRED: CONNECT YOUR BANK (RAZORPAY)
+                                            1. The money will go to YOUR Razorpay account.
+                                            2. Create a 'Payment Button' in your Razorpay Dashboard.
+                                            3. Replace 'pl_PLACEHOLDER_ID' below with your ID.
                                         -->
                                         <script src="https://checkout.razorpay.com/v1/payment-button.js" 
                                             data-payment_button_id="pl_PLACEHOLDER_ID" async> </script>
+                                        
+                                        <!-- Error Fallback Message -->
+                                        <div class="setup-required-notice" style="padding: 1rem; border: 1px dashed #ef4444; border-radius: 8px; margin: 1rem 0;">
+                                            <p style="color: #ef4444; margin: 0; font-size: 0.9rem;">
+                                                <strong>Setup Required:</strong> Replace 'pl_PLACEHOLDER_ID' in index.html with your Razorpay Button ID to activate this portal.
+                                            </p>
+                                        </div>
                                     </form>
                                     <p class="gateway-help">Pay via Cards, NetBanking, Wallets (Razorpay)</p>
                                 </div>
